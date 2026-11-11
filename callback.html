@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex"><meta name="referrer" content="no-referrer">
+<title>Neon Decoded sign-in</title><link rel="icon" href="logo.png"><link rel="stylesheet" href="style.css"></head>
+<body><main>
+<header><img src="logo.png" alt="Neon Decoded logo"><h1>Almost done</h1></header>
+<p id="msg">Copy this whole address and paste it into the terminal where the sign-in is waiting.</p>
+<p><textarea id="addr" rows="5" readonly style="width:100%;font:inherit;font-size:.85rem;background:transparent;color:inherit;border:1px solid #2a2440;border-radius:6px;padding:.5rem"></textarea></p>
+<p><button id="copy" style="font:inherit;padding:.5rem 1rem;border-radius:6px;border:0;background:var(--pink);color:#0b0912;cursor:pointer">Copy address</button></p>
+<p class="dim">This page sends nothing anywhere: the address only works together with the app's secret on your own computer.</p>
+<footer><nav><a href="index.html">Home</a><a href="privacy.html">Privacy policy</a></nav></footer>
+</main>
+<script>
+  var a = document.getElementById('addr'); a.value = location.href;
+  if (/[?&]error=/.test(location.search)) document.getElementById('msg').textContent = 'The sign-in was cancelled or refused. Paste this address into the terminal anyway to see why.';
+  document.getElementById('copy').onclick = function () {
+    a.select(); try { navigator.clipboard.writeText(a.value); } catch (e) { document.execCommand('copy'); }
+    this.textContent = 'Copied';
+  };
+</script>
+</body></html>
